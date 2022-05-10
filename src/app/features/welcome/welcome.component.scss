@@ -1,0 +1,109 @@
+mat-card-header {
+  justify-content: center;
+}
+
+mat-card-actions {
+  flex-direction: row;
+  display: flex;
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col {
+  flex: 1;
+  margin-right: 20px;
+}
+
+@media (max-width: 350px) {
+  mat-card-header mat-card-title {
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+
+  mat-card-subtitle {
+    font-size: 12px;
+  }
+
+  mat-card-content {
+    padding: 8%;
+  }
+
+  .login-card {
+    width: 60%;
+    max-width: 500px;
+    margin: 5% auto;
+    border-radius: 10px;
+  }
+
+  .full-width {
+    width: 70%;
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 351px) {
+  mat-card-header mat-card-title {
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+
+  mat-card-subtitle {
+    font-size: 12px;
+  }
+
+  mat-card-content {
+    padding: 8%;
+  }
+
+  .login-card {
+    width: 60%;
+    max-width: 500px;
+    margin: 5% auto;
+    border-radius: 10px;
+  }
+
+  .full-width {
+    width: 70%;
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 401px) {
+  mat-card-header mat-card-title {
+    font-size: 20px;
+    margin-bottom: 30px;
+  }
+
+  mat-card-subtitle {
+    font-size: 15px;
+  }
+
+  .login-card {
+    width: 60%;
+    max-width: 500px;
+    margin: 5% auto;
+    border-radius: 10px;
+  }
+
+  .full-width {
+    width: 80%;
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 768px) {
+  .full-width {
+    width: 90%;
+  }
+
+  .login-card {
+    width: 40%;
+    max-width: 500px;
+    margin: 10% auto;
+    border-radius: 10px;
+  }
+}

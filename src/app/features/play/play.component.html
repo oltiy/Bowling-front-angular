@@ -1,0 +1,84 @@
+<div *ngIf="query.state$ | async as state" class="container">
+  <form [formGroup]="scoreShots" (submit)="onFormSubmit()">
+    <div *ngIf="state.bowlingThrows.length < 10">
+      <div class="frame" cellspacing="0">
+        <div class="first-shot">
+          <mat-form-field appearance="fill">
+            <mat-label>First Shot</mat-label>
+            <input
+              matInput
+              type="number"
+              min="0"
+              max="10"
+              matInput
+              formControlName="shot1"
+              (input)="valueChanged($event)"
+            />
+          </mat-form-field>
+        </div>
+        <div *ngIf="state.bowlingThrows.length <= 8" class="second-shot">
+          <mat-form-field appearance="fill">
+            <mat-label>Second Shot</mat-label>
+            <input
+              matInput
+              type="number"
+              min="0"
+              [max]="maxScoreToGame"
+              matInput
+              formControlName="shot2"
+            />
+          </mat-form-field>
+        </div>
+        <div *ngIf="state.bowlingThrows.length > 8" class="second-shot">
+          <mat-form-field appearance="fill">
+            <mat-label>Second Shot</mat-label>
+            <input
+              matInput
+              type="number"
+              min="0"
+              max="10"
+              matInput
+              formControlName="shot2"
+            />
+          </mat-form-field>
+        </div>
+        <div class="third-shot">
+          <div *ngIf="state.bowlingThrows.length > 8 && (exposeShot3 | async)">
+            <mat-form-field appearance="fill">
+              <mat-label>Third Shot</mat-label>
+              <input
+                matInput
+                type="number"
+                min="0"
+                max="10"
+                matInput
+                formControlName="shot3"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="state.bowlingThrows.length < 10" class="play">
+      <button
+        type="submit"
+        mat-raised-button
+        color="accent"
+        [disabled]="disableButton"
+      >
+        Play
+      </button>
+    </div>
+  </form>
+
+  <app-frame
+    [shots]="state.bowlingThrows"
+    [userName]="state.userName"
+  ></app-frame>
+
+  <div *ngIf="state.bowlingThrows.length === 10" class="play">
+    <button (click)="updateTableScore()" mat-raised-button color="accent">
+      Start a new game
+    </button>
+  </div>
+</div>

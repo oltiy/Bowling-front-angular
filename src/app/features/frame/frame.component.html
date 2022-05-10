@@ -1,0 +1,31 @@
+<div *ngFor="let shot of shots">
+  <div *ngIf="shot.frame !== 10">
+    <div class="frame-box">
+      <div class="frame-name">{{ shot?.frame }}</div>
+      <div class="box">
+        <div>
+          {{ shot.shot1 }}
+        </div>
+
+        <div>
+          {{ shot.shot2 }}
+        </div>
+      </div>
+      {{ shot.total }}
+    </div>
+  </div>
+  <div *ngIf="shot.frame === 10">
+    <div class="frame-box10">
+      <div class="frame-name">{{ shot?.frame }}</div>
+      <div class="frame10">
+        <div>{{ shot.shot1 }} |</div>
+
+        <div>{{ shot.shot2 }} |</div>
+        <div>{{ shot.shot3 }}</div>
+      </div>
+      <div class="total10">
+        {{ shot.total }}
+      </div>
+    </div>
+  </div>
+</div>

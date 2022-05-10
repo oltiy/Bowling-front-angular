@@ -1,0 +1,32 @@
+.container {
+  display: block;
+  max-width: 1440px;
+  width: 50%;
+  padding: 100px;
+  margin: auto;
+}
+
+.frame {
+  align-items: flex-start;
+  display: grid;
+  justify-content: flex-start;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 24px;
+  grid-row-gap: .5rem;
+}
+
+.first-shot {
+  grid-column: 1;
+}
+
+.second-shot {
+  grid-column: 2;
+}
+
+.third-shot {
+  grid-column: 3;
+}
+
+.play {
+  margin-bottom: 25px;
+}

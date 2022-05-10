@@ -1,0 +1,38 @@
+<form *ngIf="loginForm" [formGroup]="loginForm">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>Play bowling and write save your score</mat-card-title>
+      <mat-card-subtitle>
+        Please insert you name to continue
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              type="text"
+              placeholder="username"
+              formControlName="username"
+            />
+            <mat-error> Username is <strong>required</strong> </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <a
+        [routerLink]="['/play']"
+        [queryParams]="{ name: this.loginForm?.value.username }"
+        type="submit"
+        mat-raised-button
+        color="primary"
+        (click)="setUserName()"
+        [disabled]="this.loginForm.controls?.['username']?.errors"
+      >
+        Start
+      </a>
+    </mat-card-actions>
+  </mat-card>
+</form>
