@@ -16,7 +16,6 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
 import { map, Observable, Subject, takeUntil } from 'rxjs';
 import { BowlingGameFacade } from 'src/app/domain/application/bowling-game-facade';
 import { BowlingGameQuery } from 'src/app/domain/infrastructure/bowling-game-query';
@@ -47,7 +46,6 @@ export class PlayComponent implements OnInit, OnDestroy {
   });
 
   constructor(
-    private route: ActivatedRoute,
     private facade: BowlingGameFacade,
 
     private fb: FormBuilder,
@@ -86,12 +84,20 @@ export class PlayComponent implements OnInit, OnDestroy {
             if (calculate.frame !== 10) {
               //strike
               if (calculate.shot1 === 10 && calculate.shot2 === 0) {
-                data.bowlingThrows[calculate.frame - 1].total =
-                  data.bowlingThrows[calculate.frame - 1].shot1 +
-                  data.bowlingThrows[calculate.frame - 1].shot2 +
-                  (data.bowlingThrows[calculate.frame]?.shot1 ?? 0) +
-                  (data.bowlingThrows[calculate.frame]?.shot2 ?? 0) +
-                  (data.bowlingThrows?.[calculate.frame - 2]?.total ?? 0);
+                if (data.bowlingThrows[calculate.frame + 1]?.shot1 !== 10) {
+                  data.bowlingThrows[calculate.frame - 1].total =
+                    data.bowlingThrows[calculate.frame - 1].shot1 +
+                    data.bowlingThrows[calculate.frame - 1].shot2 +
+                    (data.bowlingThrows[calculate.frame]?.shot1 ?? 0) +
+                    (data.bowlingThrows[calculate.frame]?.shot2 ?? 0) +
+                    (data.bowlingThrows?.[calculate.frame - 2]?.total ?? 0);
+                } else {
+                  data.bowlingThrows[calculate.frame - 1].total =
+                    data.bowlingThrows[calculate.frame - 1].shot1 * 2 +
+                    (data.bowlingThrows[calculate.frame]?.shot1 ?? 0) +
+                    (data.bowlingThrows[calculate.frame]?.shot2 ?? 0) +
+                    (data.bowlingThrows?.[calculate.frame - 2]?.total ?? 0);
+                }
               }
               // spare
               else if (calculate.shot1 + calculate.shot2 === 10) {
@@ -113,7 +119,7 @@ export class PlayComponent implements OnInit, OnDestroy {
             else {
               if (calculate.shot1 === 10) {
                 data.bowlingThrows[calculate.frame - 1].total =
-                  data.bowlingThrows[calculate.frame - 1].shot1 * 2 +
+                  data.bowlingThrows[calculate.frame - 1].shot1 +
                   data.bowlingThrows[calculate.frame - 1].shot2 +
                   data.bowlingThrows[calculate.frame - 1].shot3 +
                   (data.bowlingThrows?.[calculate.frame - 2]?.total ?? 0);
@@ -127,7 +133,7 @@ export class PlayComponent implements OnInit, OnDestroy {
                 data.bowlingThrows[calculate.frame - 1].total =
                   data.bowlingThrows[calculate.frame - 1].shot1 +
                   data.bowlingThrows[calculate.frame - 1].shot2 +
-                  data.bowlingThrows[calculate.frame - 1].shot3 * 2 +
+                  data.bowlingThrows[calculate.frame - 1].shot3 +
                   (data.bowlingThrows?.[calculate.frame - 2]?.total ?? 0);
               } else {
                 data.bowlingThrows[calculate.frame - 1].total =
